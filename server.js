@@ -48,7 +48,11 @@ router.route('/bears')
     .post(function(req, res) {
         
         var bear = new Bear();      // create a new instance of the Bear model
-        bear.name = req.body.name;  // set the bears name (comes from the request)
+                                    // set the bears name (comes from the request)
+        bear.id = req.body.id;
+        bear.name = req.body.name;
+        bear.description = req.body.description;
+        bear.imageUrl = req.body.imageUrl;
 
         // save the bear and check for errors
         bear.save(function(err) {
