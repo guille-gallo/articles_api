@@ -96,8 +96,11 @@ router.route('/bears/:bear_id')
             if (err)
                 res.send(err);
 
-            bear.name = req.body.name;  // update the bears info
-
+            // update the bears info
+            bear.name = req.body.name,
+            bear.description = req.body.description,
+            bear.imageUrl = req.body.imageUrl
+            
             // save the bear
             bear.save(function(err) {
                 if (err)
