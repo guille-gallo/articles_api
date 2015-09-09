@@ -4,7 +4,7 @@
 var mongoose   = require('mongoose');
 mongoose.connect('mongodb://guille-gallo:Papichulisimo1234@ds039000.mongolab.com:39000/node-api-test'); // connect to our database
 
-var Bear     = require('./app/models/bear');
+var Item     = require('./app/models/item');
 
 // call the packages we need
 var express    = require('express');        // call express
@@ -42,49 +42,49 @@ router.get('/', function(req, res) {
 
 // on routes that end in /bears
 // ----------------------------------------------------
-router.route('/bears')
+router.route('/items')
 
     // create a bear (accessed at POST http://localhost:8080/api/bears)
     .post(function(req, res) {
         
-        var bear = new Bear();      // create a new instance of the Bear model
+        var item = new Item();      // create a new instance of the Bear model
                                     // set the bears name (comes from the request)
-        bear.id = req.body.id;
-        bear.name = req.body.name;
-        bear.description = req.body.description;
-        bear.author = req.body.author;
+        item.id = req.body.id;
+        item.name = req.body.name;
+        item.description = req.body.description;
+        item.author = req.body.author;
 
         // save the bear and check for errors
-        bear.save(function(err) {
+        item.save(function(err) {
             if (err)
                 res.send(err);
 
             //res.json({ message: 'Bear created!' });
-            res.json(bear);
+            res.json(item);
         });
         
     })
 
     // get all the bears (accessed at GET http://localhost:8080/api/bears)
     .get(function(req, res) {
-        Bear.find(function(err, bears) {
+        Item.find(function(err, items) {
             if (err)
                 res.send(err);
 
-            res.json(bears);
+            res.json(items);
         });
     });
 
 // on routes that end in /bears/:bear_id
 // ----------------------------------------------------
-router.route('/bears/:bear_id')
+router.route('/items/:item_id')
 
     // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
     .get(function(req, res) {
-        Bear.findById(req.params.bear_id, function(err, bear) {
+        Item.findById(req.params.item_id, function(err, item) {
             if (err)
                 res.send(err);
-            res.json(bear);
+            res.json(item);
         });
     })
 
@@ -92,22 +92,22 @@ router.route('/bears/:bear_id')
     .put(function(req, res) {
 
         // use our bear model to find the bear we want
-        Bear.findById(req.params.bear_id, function(err, bear) {
+        Item.findById(req.params.item_id, function(err, item) {
 
             if (err)
                 res.send(err);
 
             // update the bears info
-            bear.name = req.body.name,
-            bear.description = req.body.description,
-            bear.author = req.body.author
+            item.name = req.body.name,
+            item.description = req.body.description,
+            item.author = req.body.author
             
             // save the bear
-            bear.save(function(err) {
+            item.save(function(err) {
                 if (err)
                     res.send(err);
 
-                res.json({ message: 'Bear updated!' });
+                res.json({ message: 'item updated!' });
             });
 
         });
@@ -115,9 +115,9 @@ router.route('/bears/:bear_id')
 
     // delete the bear with this id (accessed at DELETE http://localhost:8080/api/bears/:bear_id)
     .delete(function(req, res) {
-        Bear.remove({
-            _id: req.params.bear_id
-        }, function(err, bear) {
+        Item.remove({
+            _id: req.params.item_id
+        }, function(err, item) {
             if (err)
                 res.send(err);
 

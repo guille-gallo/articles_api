@@ -1,10 +1,10 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
-var BearSchema   = new Schema({
+var ItemSchema   = new Schema({
     name: String,
     description: String,
     author: String
 });
 
-module.exports = mongoose.model('Bear', BearSchema);
+module.exports = mongoose.model('Item', ItemSchema);
