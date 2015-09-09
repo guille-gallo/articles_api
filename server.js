@@ -52,14 +52,15 @@ router.route('/bears')
         bear.id = req.body.id;
         bear.name = req.body.name;
         bear.description = req.body.description;
-        bear.imageUrl = req.body.imageUrl;
+        bear.author = req.body.author;
 
         // save the bear and check for errors
         bear.save(function(err) {
             if (err)
                 res.send(err);
 
-            res.json({ message: 'Bear created!' });
+            //res.json({ message: 'Bear created!' });
+            res.json(bear);
         });
         
     })
@@ -99,7 +100,7 @@ router.route('/bears/:bear_id')
             // update the bears info
             bear.name = req.body.name,
             bear.description = req.body.description,
-            bear.imageUrl = req.body.imageUrl
+            bear.author = req.body.author
             
             // save the bear
             bear.save(function(err) {
