@@ -53,6 +53,7 @@ router.route('/items')
         item.name = req.body.name;
         item.description = req.body.description;
         item.author = req.body.author;
+        item.borrowed = req.body.borrowed;
 
         // save the bear and check for errors
         item.save(function(err) {
@@ -100,7 +101,8 @@ router.route('/items/:item_id')
             // update the bears info
             item.name = req.body.name,
             item.description = req.body.description,
-            item.author = req.body.author
+            item.author = req.body.author,
+            item.borrowed = req.body.borrowed
             
             // save the bear
             item.save(function(err) {
